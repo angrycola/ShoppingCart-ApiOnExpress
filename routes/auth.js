@@ -1,7 +1,11 @@
-import * as controller from '../controllers/auth';
-import express from 'express';
+import { Router } from 'express';
+import passport from 'passport';
 
-const router = express.Router();
+import * as controller from '../controllers/auth';
+import passportService from './lib/passport';
+
+const router = Router();
+const requireAuth = passport.authenticate('jwt', { session: false });
 
 router.post('/signup', controller.signup);
 
