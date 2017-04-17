@@ -1,11 +1,15 @@
 import jwt from 'jwt-simple';
-import secret from '../lib/secret/passport';
+import secret from '../lib/passport/secret';
 
 import User from '../models/user';
 
 const tokenForUser = user => {
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp, email: user.email }, secret.key);
+};
+
+export const signin = (req, res, next) => {
+  res.send({ token: tokenForUser(req.user) });
 };
 
 export const signup = (req, res, next) => {
