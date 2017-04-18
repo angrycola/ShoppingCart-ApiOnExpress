@@ -27,3 +27,11 @@ export const signup = (req, res, next) => {
     });
   });
 };
+
+export const pre = (req, res, next) => {
+  const email = req.body.email;
+  User.findOne({ email }, (err, existingUser) => {
+    if (existingUser) return res.send({ error: 'Email is already in use' });
+    if (err) return next(err);
+  });
+};
