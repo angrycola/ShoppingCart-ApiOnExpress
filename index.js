@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import { mongoose } from './lib/db/mongoose';
 import authRoutes from './routes/auth';
+import productRoutes from './routes/product';
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.get('/', (req, res) => res.send('echo'));
 app.use('/users', authRoutes);
+app.use('/products', productRoutes);
 
 app.use(logger('dev'));
 
